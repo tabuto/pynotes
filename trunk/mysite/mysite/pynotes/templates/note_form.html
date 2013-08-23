@@ -1,0 +1,32 @@
+{% extends "template.html" %}	
+
+{% block title %} Inserimento/Modifica cell {% endblock %}	
+
+{% block content %}
+  {% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+  {% endif %}
+   <section id="about-us" class="clearfix">
+   <div class="primary">
+    <h1>{{ sezione.titolo }}</h1>
+   <a href="/mysite/pynotes/note/type/add/"> ADD TYPE</a>
+  <form action="/mysite/pynotes/note/new/" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="save"/>
+  </form>
+  
+  {% for field in form %}
+  	{{ field.errors }}
+  {% endfor %}
+  </div>
+  {% endblock %}
+  
+  {% block sider %}
+  		
+			<h2>Actions</h2>
+              	<a href="/mysite/pynotes/note/type/add" class="download-btn">Add Type</a>
+       
+  
+  </section>    	
+{% endblock %}

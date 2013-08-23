@@ -1,0 +1,42 @@
+{% extends "template.html" %}
+
+{% block title %}{{ sezione.titolo }}{% endblock %}
+
+{% block content %}
+ 
+
+    <h1>{{ sezione.titolo }}</h1>
+    
+    
+    
+    {% if note_list %} 
+	  <ul class="the-team">
+	  {% for note in note_list %}
+	  	{% if forloop.counter|divisibleby:2 %}
+	   		<li>
+	  	{% else %}
+	   		<li class="odd">
+	 	{% endif %}
+	   	<div class="thumbnail">
+		  	<a href="/mysite/pynotes/note/{{ note.id }}">
+		  		<img class="align-left" alt="" src="{{ STATIC_PREFIX }}images/services/print-design.png" />
+		  	</a>
+	  	</div>
+	    <p  class="mname">{{ note.title }}</p> 
+	  	<p>Date: {{ note.pub_date }}</p> 
+	  	<p>Type: {{ note.type.desc }}</p>
+	  </li>
+	{% endfor %}
+	  </ul>
+  {% endif %} 
+{% if not note_list %} 
+ <p> You don't have notes yet!</p>
+{% endif %} 
+ 
+{% endblock %}
+{% block sider %}  
+	  
+			<h2>Actions</h2>
+                    <a href="/mysite/pynotes/note/add" class="download-btn">Add Note</a>
+              		<a href="/mysite/pynotes/note/type/add" class="download-btn">Add Type</a>
+{% endblock %}
