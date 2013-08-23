@@ -1,0 +1,42 @@
+{% extends "template.html" %}	
+
+{% block title %} Inserimento/Modifica cell {% endblock %}	
+
+{% block content %}
+  {% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+  {% endif %}
+  
+  <form action="/mysite/pynotes/note/new/" method="post">
+  {% csrf_token %}
+  <table>
+    <tr><td>Title:</td><td><input type="text" name="title" value=""/></td></tr>
+    <tr><td>Type:</td>
+	    <td>
+	    	
+  			
+	    	New: <input type="text" name="new_type_desc" value=""/>
+	    	<input type="submit" value="add"/>
+	    	
+	    	
+	    	<select title="type_options">
+		   	 {% for opt in type_list %}
+		   	 	 <option value="{{opt.id}}">{{opt.desc}}</option>
+		   	  {% endfor %}	
+			</select>
+			
+			
+			
+	    </td>
+    </tr>
+    <tr>
+    	<td>Body:</td>
+    	<td>
+			<textarea name="body" cols="50" rows="25"></textarea>
+    	</td>
+    </tr>
+    <tr><td><input type="submit" value="save"/></td></tr>
+    
+  </table>    
+  </form>    	
+{% endblock %}

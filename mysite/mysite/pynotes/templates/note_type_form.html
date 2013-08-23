@@ -1,0 +1,30 @@
+{% extends "template.html" %}	
+
+{% block title %} Insert/Edit Note Types {% endblock %}	
+
+{% block content %}
+  {% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+  {% endif %}
+  
+
+  
+  <form action="/mysite/pynotes/note/type/new/" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="save"/>
+  </form>
+  
+  {% for field in form %}
+  	{{ field.errors }}
+  {% endfor %}
+  
+  <h2>Note's Type</h2>
+  <ul class="link-list">
+  	 {% for tnote in type_list %}
+  	  <li><a href="#">{{ tnote.id }} - {{ tnote.desc }}</a> </li>
+  	 {% endfor %}
+  </ul>
+
+      	
+{% endblock %}

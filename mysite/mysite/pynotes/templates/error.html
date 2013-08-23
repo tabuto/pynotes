@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+
+{% block title %}{{ sezione.titolo }}{% endblock %}
+
+{% block content %}
+ 
+  <section id="about-us" class="clearfix">
+   <div class="primary">
+   
+	 <h1>{{ sezione.titolo }}</h1>
+   
+	
+	  {% for k,v in errors.items %}
+	  	<h3>Error Code: {{ k }}</h3>
+	  	<p>{{ v }}</p> 
+	  {% endfor %}
+	  
+	  
+	  
+</div>
+</section>
+{% endblock %}

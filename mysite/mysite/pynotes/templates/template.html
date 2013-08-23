@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html class="ie7 oldie"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 oldie"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html> <!--<![endif]-->
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <meta name="description" content="">
+    <meta name="author" content="">    
+  <title>{% block title %}{% endblock %}</title>
+ 
+  {% load static %}
+  {% get_static_prefix as STATIC_PREFIX %}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}/style.css" media="screen" />
+  <link rel="stylesheet" href="{{ STATIC_PREFIX }}/nivo-slider.css" type="text/css" />
+  <link rel="stylesheet" href="{{ STATIC_PREFIX }}/jquery.fancybox-1.3.4.css" type="text/css" />
+  
+    <!--[if lt IE 9]>
+	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ STATIC_PREFIX }}/js/jquery-1.6.1.min.js"><\/script>')</script>
+
+    <script src="{{ STATIC_PREFIX }}/js/jquery.smoothscroll.js"></script>
+    <script src="{{ STATIC_PREFIX }}/js/jquery.nivo.slider.pack.js"></script>
+    <script src="{{ STATIC_PREFIX }}/js/jquery.easing-1.3.pack.js"></script>
+    <script src="{{ STATIC_PREFIX }}/js/jquery.fancybox-1.3.4.pack.js"></script>
+    <script src="{{ STATIC_PREFIX }}/js/init.js"></script>
+  
+  
+</head>
+<body>
+	<div id="header-wrap">
+    <header>
+
+        <hgroup>
+            <h1><a href="/mysite/pynotes">PyNotes</a></h1>
+            <h3>A simple Note Manager</h3>
+        </hgroup>
+
+        <nav>
+            <ul>
+                <li><a href="/mysite/pynotes">Home</a></li>
+                <li><a href="/mysite/pynotes/welcome">How it works</a></li>
+                <li><a href="/mysite/pynotes/about">About Us</a></li>
+                <li><a href="/mysite/pynotes/contact">Contact Us</a></li>
+            </ul>
+            <div class = "login">
+         {% if user.is_authenticated %}
+          <form method="post" action="/mysite/pynotes/logout/">
+          	{% csrf_token %}
+          	<p>Welcome, {{ user.username }}
+          	<input type="submit" value="Logout" />
+          </form>
+         
+         
+         {% else %}
+       	 <form method="post" action="/mysite/pynotes/login/">
+		    {% csrf_token %}
+		    <label for="username" >Username </label><input id="id_username" type="text" name="username" maxlength="30" placeholder="username"/>
+		    <br>
+		    <label for="password" >Password </label><input type="password" name="password" id="id_password"  placeholder="password" />
+			<br>
+		    <input type="submit" value="Log in" />
+		    <input type="hidden" name="next" value="" />
+		  {% endif%}
+		</form>
+		</div>
+        </nav>
+        
+		
+
+    </header>
+</div>
+  
+<!-- content-wrap -->
+<div class="content-wrap">
+
+    <!-- main -->
+    <section id="main">
+    	   <section id="about-us" class="clearfix">
+   				<div class="primary">
+  				{% block content %}{% endblock %}
+  				</div>
+  				
+  				 <aside>
+  					{% block sider %}{% endblock %}
+  				</aside>
+  				
+  	 </section>
+	</section>
+	   <!-- end main -->
+		
+</div>
+<!-- end content-wrap -->
+ 
+<!-- footer -->
+<footer>
+    <div class="footer-content">
+        <ul class="footer-menu">
+            <li><a href="/mysite/pynotes">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="/mysite/pynotes/about/">About</a></li>
+            <li><a href="/mysite/pynotes/contact">Contact</a></li>
+            <!-- <li class="rss-feed"><a href="#">RSS Feed</a></li> -->
+        </ul>
+
+        <p class="footer-text">Copyright 2013 Incrastagnate's L.t.d. &nbsp;&nbsp;&nbsp; Designed by Francesco di Dio</p>
+    </div>
+
+</footer>
+</body>
+</html>

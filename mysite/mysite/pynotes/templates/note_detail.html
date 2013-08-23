@@ -1,0 +1,23 @@
+{% extends "template.html" %}
+
+{% block title %}{{ sezione.titolo }}{% endblock %}
+
+{% block content %}
+  
+
+    <h1>{{ sezione.titolo }}</h1>
+   	<h2>{{ selected.title}}</h2>
+   	<h3>{{ selected.type.desc}}</h3>
+   	<h4>{{ selected.pub_date}}</h4>
+   	<p>{{ selected.body}}
+   
+{% endblock %}
+
+{% block sider %}
+	  	
+			<h2>Actions</h2>
+                    <a href="/mysite/pynotes/" class="download-btn">Delete</a>
+              		<a href="/mysite/pynotes/" class="download-btn">Edit</a>
+       
+{% endblock %}
+
