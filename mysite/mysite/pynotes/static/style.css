@@ -614,7 +614,7 @@ section#about-us .primary ul.the-team li.odd {
     margin-right: 35px;
 }
 
-section#about-us aside .download-btn {
+section#about-us aside .download-btn  {
     background: url(../images/btn-bg.png);
     display: block;
     width: 250px;
@@ -632,6 +632,32 @@ section#about-us aside .download-btn {
     box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0 1px 0 #28a441;
     -moz-box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0 1px 0 #28a441;
     -webkit-box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0 1px 0 #28a441;
+}
+
+section#about-us aside input  {
+    background: url(../images/btn-bg.png);
+    display: block;
+    width: 250px;
+    height: 53px;
+    border: 1px solid #066a19;
+    margin: 0 0 20px 0;
+    text-align: center;
+    line-height: 55px;
+
+    font-family: "MerriweatherBold", Georgia, Serif;
+    font-size: 20px;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0 1px 0 #28a441;
+    -moz-box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0 1px 0 #28a441;
+    -webkit-box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0 1px 0 #28a441;
+}
+
+section#about-us label {
+	font: 12px/14px  Sans-serif,Helvetica,Arial ;
+	text-shadow: 0 -1px 0 rgba(10, 10, 10, 1);
+	color: rgb(4,100,22);
 }
 
 /* ---------------------------------------------------
