@@ -1,6 +1,6 @@
 # Create your views here.
 from django.http import HttpResponse,HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from models import Note, NoteType, NoteForm, NoteTypeForm
 from django.forms.models import inlineformset_factory
 from datetime import datetime
@@ -55,16 +55,28 @@ def note_list(request):
                             {'sezione':{'titolo':'Note Collection'}, 'note_list': note_list})
   
 @login_required(login_url='/mysite/pynotes/welcome/')
-def note_form(request):
+def note_form(request, note_id=None):
     type_list = NoteType.objects.all().order_by('desc')
-    form = NoteForm()
+    
+    if note_id:
+        note = Note.objects.get(id=note_id)
+        data = {
+        'id':note.id,
+         'title': note.title,
+         'body': note.body,
+         'type': note.type
+         }
+        form = NoteForm(initial=data)
+    else:
+        form = NoteForm()
+    
     return render(request,"note_form.html", 
-                            {'sezione':{'titolo':'Edit Add Note '}, 'type_list': type_list,'form':form})
+                            {'sezione':{'titolo':'Edit Add Note '}, 'type_list': type_list,'form':form,'note_id':note_id})
 
 @login_required(login_url='/mysite/pynotes/welcome/')
-def note_type_form(request):
+def note_type_form(request):  
     type_list = NoteType.objects.all().order_by('desc')
-    form = NoteTypeForm()
+    form = NoteTypeForm()    
     return render(request,"note_type_form.html", 
                             {'sezione':{'titolo':'Edit Add Note Type '}, 'type_list': type_list,'form':form})
 
@@ -73,6 +85,23 @@ def note_detail(request,note_id):
     selected = Note.objects.get(id=note_id)
     return render(request,"note_detail.html", 
                             {'sezione':{'titolo':'Note Detail '}, 'selected': selected})
+
+@login_required(login_url='/mysite/pynotes/welcome/')
+def edit_note(request, note_id):
+    print 'edit note_id '+ str(note_id)
+    return note_list(request)
+
+@login_required(login_url='/mysite/pynotes/welcome/')
+def edit_note_type(request, note_type_id):
+    print 'edit note_type_id '+ str(note_type_id)
+    return note_list(request)
+
+@login_required(login_url='/mysite/pynotes/welcome/')
+def del_note(request, note_id):
+    print 'delete note_id '+ str(note_id)
+    note = Note.objects.get(id=note_id)
+    note.delete()
+    return note_list(request)
 
 @login_required(login_url='/mysite/pynotes/welcome/')
 def add_new_note_type(request):
@@ -88,9 +117,12 @@ def add_new_note_type(request):
             
 
 @login_required(login_url='/mysite/pynotes/welcome/')
-def add_new_note(request):
+def add_new_note(request,note_id=None):
     if request.method == 'POST': # If the form has been submitted...
         form = NoteForm(request.POST) # A form bound to the POST data
+        if note_id:
+            print note_id
+            form = NoteForm(request.POST,instance=get_object_or_404(Note, id=note_id)) 
         if form.is_valid(): # All validation rules pass 
             note = form.save(commit=False)
             note.pub_date = datetime.now()

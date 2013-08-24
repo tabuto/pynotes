@@ -32,10 +32,11 @@ class NoteForm(ModelForm):
     
     class Meta:
         model = Note
-        fields = ('title','body','type')
+        fields = ('title','body','type','id')
         exclude = ('pub_date',)
         widgets = {
             'body': Textarea(attrs={'cols': 70, 'rows': 10}),
+            
         }
     def clean_pub_date(self):
         self.cleaned_data['pub_date'] = datetime.now()
