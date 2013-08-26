@@ -3,7 +3,9 @@
 {% block title %}{{ sezione.titolo }}{% endblock %}
 
 {% block content %}
- 
+
+
+
 
     <h1>{{ sezione.titolo }}</h1>
     
@@ -17,14 +19,25 @@
 	  	{% else %}
 	   		<li class="odd">
 	 	{% endif %}
-	   	<div class="thumbnail">
-		  	<a href="/mysite/pynotes/note/{{ note.id }}">
+	   	<div class="thumbnail" id="thumb" onclick="toggleNoteBody({{ note.id }})">
+		  	
 		  		<img class="align-left" alt="" src="{{ STATIC_PREFIX }}images/services/print-design.png" />
-		  	</a>
+		  	
+	  	</div>
+	  	<div class="target" id="note_body_{{ note.id }}" >
+			<div id="win_option" onclick="toggleNoteBody({{ note.id }})">
+			<img class="align-left" alt="" src="{{ STATIC_PREFIX }}images/fancybox/fancy_close.png" />
+			</div>
+			{% autoescape off %}
+			<p>Body: {{ note.body }}</p>
+			{% endautoescape %}
 	  	</div>
 	    <p  class="mname">{{ note.title }}</p> 
 	  	<p>Date: {{ note.pub_date }}</p> 
 	  	<p>Type: {{ note.type.desc }}</p>
+	  		<a href="/mysite/pynotes/note/{{ note.id }}">
+		  		<img class="align-left" alt="" src="{{ STATIC_PREFIX }}images/services/webdevelopment.png" width="30" height="31" />
+		  	</a>
 	  </li>
 	{% endfor %}
 	  </ul>
@@ -40,3 +53,6 @@
                     <a href="/mysite/pynotes/note/add" class="download-btn">Add Note</a>
               		<a href="/mysite/pynotes/note/type/add" class="download-btn">Add Type</a>
 {% endblock %}
+
+
+

@@ -1,0 +1,25 @@
+{% extends "template.html" %}
+
+{% block title %}{{ sezione.titolo }}{% endblock %}
+
+{% block content %}
+ 
+
+    <h1>{{ sezione.titolo }}</h1>
+    <h3> Register to Pynote,</h3>
+    <p> Fill the followed form in order to apply a free registration.</p>
+    <form method="POST" action="/mysite/pynotes/register/">
+    	{% csrf_token %}
+    	{{userform}}
+    	
+    <input type="submit">
+</form>
+ 
+{% endblock %}
+{% block sider %}  
+	  
+	
+{% endblock %}
+
+
+

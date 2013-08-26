@@ -1,17 +1,39 @@
 # Create your views here.
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from models import Note, NoteType, NoteForm, NoteTypeForm
+from models import Note, NoteType, NoteForm, NoteTypeForm, UserForm
 from django.forms.models import inlineformset_factory
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
+
+def user_registration(request):
+    if request.method == 'POST': # If the form has been submitted...
+        uf = UserForm(request.POST)
+        if uf.is_valid():
+            username_id = request.POST['username']
+            pswd = request.POST['password']
+            email = request.POST['email']
+            user = User.objects.create_user(username_id, email, pswd)
+            user.save()
+            print 'User succesfully registered!'
+
+    return HttpResponseRedirect('/mysite/pynotes/')
 
 def pynotes_login(request):
     if request.method == 'POST': # If the form has been submitted...
-        username_id = request.POST['username']
-        pswd = request.POST['password']
-        user = authenticate(username=username_id, password=pswd)
+    
+        if 'register_sub' in request.POST:
+            uf = UserForm()
+            return render(request,"register.html", 
+                      {'sezione':{'titolo':'Registration'}, 'errors': None,'userform':uf})
+        else :
+            # do unsubscribe
+            username_id = request.POST['username']
+            pswd = request.POST['password']
+            user = authenticate(username=username_id, password=pswd)
     else:
         user = None
     

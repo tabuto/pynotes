@@ -1,7 +1,8 @@
 from django.db import models
 from django.forms import ModelForm,Textarea,CharField
 from django.forms.models import ModelChoiceField
-from datetime import datetime  
+from datetime import datetime
+from django.contrib.auth.models import User  
 
 # Create your models here.
 
@@ -17,6 +18,7 @@ class Note(models.Model):
   pub_date = models.DateTimeField('pub_date')
   type = models.ForeignKey(NoteType)
   body = models.CharField(max_length=4000)
+
 
 class NoteTypeForm(ModelForm):
      desc = CharField(label='Description')
@@ -43,7 +45,10 @@ class NoteForm(ModelForm):
         return self.cleaned_data['pub_date'] 
         
    
-
+class UserForm(ModelForm):
+    class Meta:
+        model = User  
+        fields = ('username','email','password')
 
 
 '''

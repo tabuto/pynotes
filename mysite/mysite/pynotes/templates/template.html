@@ -21,13 +21,9 @@
     <![endif]-->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ STATIC_PREFIX }}/js/jquery-1.6.1.min.js"><\/script>')</script>
-
-    <script src="{{ STATIC_PREFIX }}/js/jquery.smoothscroll.js"></script>
-    <script src="{{ STATIC_PREFIX }}/js/jquery.nivo.slider.pack.js"></script>
-    <script src="{{ STATIC_PREFIX }}/js/jquery.easing-1.3.pack.js"></script>
-    <script src="{{ STATIC_PREFIX }}/js/jquery.fancybox-1.3.4.pack.js"></script>
-    <script src="{{ STATIC_PREFIX }}/js/init.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ STATIC_PREFIX }}js/jquery-1.6.1.min.js"><\/script>')</script>
+    <script src="{{ STATIC_PREFIX }}js/init.js"></script>
+    
   
   
 </head>
@@ -64,6 +60,7 @@
 		    <label for="password" >Password </label><input type="password" name="password" id="id_password"  placeholder="password" />
 			<br>
 		    <input type="submit" value="Log in" />
+		    <input type="submit" name="register_sub" value="Register" />
 		    <input type="hidden" name="next" value="" />
 		  {% endif%}
 		</form>
@@ -112,5 +109,8 @@
     </div>
 
 </footer>
+
+
+
 </body>
 </html>

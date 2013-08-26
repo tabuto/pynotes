@@ -596,6 +596,59 @@ section#about-us .primary ul.the-team li .thumbnail {
     height: 150px;
     margin-right: 12px;
 }
+
+section#about-us .primary ul.the-team li .target {
+	display:none;
+/*
+	background: grey;
+	width: 300px;
+	height: 200px;
+	margin: 0 auto;
+	text-align: center;
+	font: 12px/14px  Sans-serif,Helvetica,Arial ;
+	color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    
+    
+    filter: alpha(opacity=80);
+    position: Absolute;
+    top: 200px;
+    left: 200px;
+    background-color: rgba(50,50,50,0.8);
+    width: 400px;
+    height: 400px;
+    padding: 5px;
+*/    
+    
+    
+  background-color:rgba(100,100,100,0.8);
+  color: #ffffff;
+  font: 12px Sans-serif,Helvetica,Arial ;
+  border:1px solid #999999;
+  cursor:default;
+  display:none;
+  margin-top: 15px;
+  position:absolute;
+  text-align:left;
+  width:270px;
+  z-index:50;
+  padding: 25px 25px 20px;
+  box-shadow: 10px 10px 5px #303030;
+  border-radius: 10px 10px 10px 10px;
+  text-shadow: none; 
+    
+}
+
+section#about-us .primary ul.the-team li .target a{
+	color: #ffFF00;
+	}
+section#about-us .primary ul.the-team li .target a:hover,
+section#about-us .primary ul.the-team li .target a:focus,
+section#about-us .primary ul.the-team li .target a:active
+{
+	color: #ffFFFF;
+	}
+
 section#about-us .primary ul.the-team li .thumbnail img {
     position: absolute;
     top: 19px;
@@ -608,7 +661,7 @@ section#about-us .primary ul.the-team li p {
 }
 section#about-us .primary ul.the-team li p.mname {
     font-family: "MerriweatherBold", Serif;
-    margin: 50px 0 0 0;
+    margin: 0px 0 0 0;
 }
 section#about-us .primary ul.the-team li.odd {
     margin-right: 35px;
