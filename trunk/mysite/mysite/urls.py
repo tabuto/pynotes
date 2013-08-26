@@ -19,7 +19,10 @@ urlpatterns = patterns('',
     url( r'^mysite/pynotes/welcome/$', 'mysite.pynotes.views.welcome' ),
     url( r'^mysite/pynotes/about/$', 'mysite.pynotes.views.about' ),
     url( r'^mysite/pynotes/contact/$', 'mysite.pynotes.views.contact' ),
+    url( r'^mysite/pynotes/register/$', 'mysite.pynotes.views.user_registration' ),
     url( r'^mysite/pynotes/$', 'mysite.pynotes.views.note_list' ),
+    
+    
     # Examples:
     # url(r'^$', 'mysite.views.home', name='home'),
     # url(r'^mysite/', include('mysite.foo.urls')),

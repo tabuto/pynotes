@@ -1,4 +1,8 @@
-
+var django = {
+    "jQuery": jQuery.noConflict(true)
+};
+var jQuery = django.jQuery;
+var $=jQuery;
 /* Nivo Slider */
 $(window).load(function() {
 
@@ -7,6 +11,7 @@ $(window).load(function() {
 });
 
 $(document).ready(function(){
+	
 
     /* Fancy Box */
     $('a.lightbox').fancybox({
@@ -46,4 +51,15 @@ $(document).ready(function(){
     */
 });
 
+/*
+ * Funzioni specifiche per pynotes
+ */
+
+function toggleNoteBody(id){
+	   //alert("this is an alert for id: "+id);
+	   //alert('thumb clicked');
+	   target="#note_body_"+id;
+	    $(target).slideToggle('slow');
+		//});
+	}
 

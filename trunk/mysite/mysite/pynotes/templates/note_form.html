@@ -6,8 +6,7 @@
   {% if error_message %}
     <p><strong>{{ error_message }}</strong></p>
   {% endif %}
-   <section id="about-us" class="clearfix">
-   <div class="primary">
+  
     <h1>{{ sezione.titolo }}</h1>
    <a href="/mysite/pynotes/note/type/add/"> ADD TYPE</a>
   {% if note_id  %}
@@ -23,15 +22,16 @@
   {% for field in form %}
   	{{ field.errors }}
   {% endfor %}
-  </div>
+  
   {% endblock %}
   
   {% block sider %}
   		
 			<h2>Actions</h2>
+			    <a href="/mysite/pynotes" class="download-btn">Back</a>
               	<a href="/mysite/pynotes/note/type/add" class="download-btn">Add Type</a>
               	 <input type="submit" value="Save" class="download-btn"/>
        
   </form>
-  </section>    	
+  	
 {% endblock %}
