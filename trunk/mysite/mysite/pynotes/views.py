@@ -1,12 +1,38 @@
 # Create your views here.
-from django.http import HttpResponse,HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse,HttpResponseRedirect,Http404
+from django.shortcuts import render, get_object_or_404,render_to_response
 from models import Note, NoteType, NoteForm, NoteTypeForm, UserForm
 from django.forms.models import inlineformset_factory
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.template import RequestContext
+
+
+@login_required(login_url='/mysite/pynotes/welcome/')
+def get_body(request,note_id):
+    if request.is_ajax():
+        print 'get_body AJAX called for id '+str(id)
+        body =  Note.objects.get(id=note_id).body
+        return render_to_response('ajax.html',
+                                  { 'selected_body':body,'note_id':note_id},
+                                  context_instance = RequestContext(request))
+    else:
+         print 'Not ajaxRequest '
+         raise Http404
+
+@login_required(login_url='/mysite/pynotes/welcome/')
+def get_note_type_list(request):
+    if request.is_ajax():
+        print 'get_note_type_list called for id '+str(id)
+        type_list = NoteType.objects.all().order_by('desc')
+        return render_to_response('ajax.html',
+                                  { 'selected_body':body,'type_list':type_list},
+                                  context_instance = RequestContext(request))
+    else:
+         print 'Not ajaxRequest '
+         raise Http404
 
 
 def user_registration(request):
@@ -127,14 +153,25 @@ def del_note(request, note_id):
 
 @login_required(login_url='/mysite/pynotes/welcome/')
 def add_new_note_type(request):
-     if request.method == 'POST': # If the form has been submitted...
+    
+     if request.is_ajax():
+        print 'get_note_type_list AJAX called for '
         form = NoteTypeForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             form.save()
-            
-     type_list = NoteType.objects.all().order_by('desc')
-     form = NoteTypeForm() # An unbound form
-     return render(request,"note_type_form.html", 
+        type_list = NoteType.objects.all().order_by('desc')
+        form = NoteTypeForm() # An unbound form
+        return render_to_response('note_type_form.html',
+                                  { 'sezione':{'titolo':'Edit Add Note Type '},'type_list':type_list, 'form':form},
+                                  context_instance = RequestContext(request))
+    
+     elif request.method == 'POST': # If the form has been submitted...
+        form = NoteTypeForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            form.save()
+        type_list = NoteType.objects.all().order_by('desc')
+        form = NoteTypeForm() # An unbound form
+        return render(request,"note_type_form.html", 
                             {'sezione':{'titolo':'Edit Add Note Type '}, 'type_list': type_list,'form':form})
             
 

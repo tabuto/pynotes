@@ -6,11 +6,9 @@
   {% if error_message %}
     <p><strong>{{ error_message }}</strong></p>
   {% endif %}
-    <h1>{{ sezione.titolo }}</h1>
-  
+    <h1>{{ sezione.titolo }}</h1>  
 
   
-  <form action="/mysite/pynotes/note/type/new/" method="post">
   {% csrf_token %}
   {{ form.as_p }}
   
@@ -20,7 +18,7 @@
   {% endfor %}
   
   <h2>Note's Type</h2>
-  <ul class="link-list">
+  <ul class="link-list" id="link_list">
   	 {% for tnote in type_list %}
   	  <li><a href="#">{{ tnote.id }} - {{ tnote.desc }}</a> </li>
   	 {% endfor %}
@@ -31,8 +29,29 @@
   		
 			<h2>Actions</h2>
               	<a href="/mysite/pynotes" class="download-btn">Back</a>
-              	 <input type="submit" value="Save" class="download-btn"/>
+              	 <input type="submit" id="btn_save" value="Save" class="download-btn"/>
        
   </form>
-  	
+  
+  <script type="text/javascript">
+
+	  alert('jquery function');
+      var form = $("#note_type_form");
+      form.submit(function(e) {
+    	  alert('form submit event triggered');
+          $("#btn_save").attr('disabled', true);
+          to_load="/mysite/pynotes/note/type/new/";
+          alert('load note type list');
+          $("#link_list").load(to_load + ' #link_list',
+              form.serializeArray(),
+              function(responseText, responseStatus) {
+                  $("#btn_save").attr('disabled', false);
+              }
+          );
+          e.preventDefault(); 
+      });
+
+  </script>
+
+  
 {% endblock %}
