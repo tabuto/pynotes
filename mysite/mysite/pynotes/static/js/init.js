@@ -12,6 +12,10 @@ $(window).load(function() {
 
 $(document).ready(function(){
 	
+	 $.blockUI.defaults.applyPlatformOpacityRules = false;
+	 $.ajaxSetup({traditional: true});
+	
+	
 
     /* Fancy Box */
     $('a.lightbox').fancybox({
@@ -56,10 +60,19 @@ $(document).ready(function(){
  */
 
 function toggleNoteBody(id){
-	   //alert("this is an alert for id: "+id);
-	   //alert('thumb clicked');
+
 	   target="#note_body_"+id;
-	    $(target).slideToggle('slow');
-		//});
+	   to_load="/mysite/pynotes/note/body/"+id;
+	   $("#note_body_text_"+id).load(to_load+" #note_body_text_"+id);
+	   $(target).slideToggle('slow');
+	
 	}
+
+
+
+
+
+
+
+
 

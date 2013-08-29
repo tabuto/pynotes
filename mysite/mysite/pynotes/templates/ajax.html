@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+
+{% block title %}{{ sezione.titolo }}{% endblock %}
+
+{% block content %}
+ 
+
+    <h1>{{ sezione.titolo }}</h1>
+    <h3> Welcome to Pynote,</h3>
+    <p> This is a service page for ajax request</p>
+    <div id="note_body_text_{{ note_id }}">
+    {% autoescape off %}
+    <p >Body: {{ selected_body }}</p>
+    {% endautoescape %}
+	</div>	
+	
+ 
+{% endblock %}
+{% block sider %}  
+	  
+	
+{% endblock %}

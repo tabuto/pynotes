@@ -28,9 +28,11 @@
 			<div id="win_option" onclick="toggleNoteBody({{ note.id }})">
 			<img class="align-left" alt="" src="{{ STATIC_PREFIX }}images/fancybox/fancy_close.png" />
 			</div>
+			<div id="note_body_text_{{ note.id }}">
 			{% autoescape off %}
-			<p>Body: {{ note.body }}</p>
+			<p>Body: {{ selected_body }}</p>
 			{% endautoescape %}
+			</div>
 	  	</div>
 	    <p  class="mname">{{ note.title }}</p> 
 	  	<p>Date: {{ note.pub_date }}</p> 
