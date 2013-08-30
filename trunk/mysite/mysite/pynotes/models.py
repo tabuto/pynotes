@@ -18,6 +18,7 @@ class Note(models.Model):
   pub_date = models.DateTimeField('pub_date')
   type = models.ForeignKey(NoteType)
   body = models.CharField(max_length=4000)
+  owner = models.ForeignKey(User)
 
 
 class NoteTypeForm(ModelForm):
