@@ -8,7 +8,7 @@
   {% endif %}
     <h1>{{ sezione.titolo }}</h1>  
 
-  
+  <form id="note_type_form" action="/mysite/pynotes/note/type/new/" method="post">
   {% csrf_token %}
   {{ form.as_p }}
   

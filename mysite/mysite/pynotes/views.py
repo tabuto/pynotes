@@ -97,7 +97,7 @@ def contact(request):
 @login_required(login_url='/mysite/pynotes/welcome/')
 def note_list(request):
   print 'note_list request'
-  note_list = Note.objects.all()
+  note_list = Note.objects.filter(owner=request.user.id).order_by('pub_date')
   print 'size: ' + str(len(note_list))
   return render(request,"home.html", 
                             {'sezione':{'titolo':'Note Collection'}, 'note_list': note_list})
@@ -130,7 +130,7 @@ def note_type_form(request):
 
 @login_required(login_url='/mysite/pynotes/welcome/')
 def note_detail(request,note_id):
-    selected = Note.objects.get(id=note_id)
+    selected = Note.objects.get(id=note_id,owner_id=request.user.id)
     return render(request,"note_detail.html", 
                             {'sezione':{'titolo':'Note Detail '}, 'selected': selected})
 
@@ -159,6 +159,7 @@ def add_new_note_type(request):
         form = NoteTypeForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             form.save()
+            print 'note type saved'
         type_list = NoteType.objects.all().order_by('desc')
         form = NoteTypeForm() # An unbound form
         return render_to_response('note_type_form.html',
@@ -169,6 +170,7 @@ def add_new_note_type(request):
         form = NoteTypeForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             form.save()
+            print 'note type saved'
         type_list = NoteType.objects.all().order_by('desc')
         form = NoteTypeForm() # An unbound form
         return render(request,"note_type_form.html", 
@@ -185,6 +187,7 @@ def add_new_note(request,note_id=None):
         if form.is_valid(): # All validation rules pass 
             note = form.save(commit=False)
             note.pub_date = datetime.now()
+            note.owner=request.user
             note.save()
             return HttpResponseRedirect('/mysite/pynotes/')
         else:
@@ -210,6 +213,7 @@ def new_type(request):
     to_add.desc = request.POST['new_type_desc']
     to_add.objects.save()
     type_list = NoteType.objects.all().order_by('desc')
+    print 'new type saved'
     return render(request,"note_form.html", 
                             {'sezione':{'titolo':'Edit Add Note '}, 'type_list': type_list})
     
