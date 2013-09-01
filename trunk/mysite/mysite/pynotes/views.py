@@ -130,7 +130,7 @@ def note_type_form(request):
 
 @login_required(login_url='/mysite/pynotes/welcome/')
 def note_detail(request,note_id):
-    selected = Note.objects.get(id=note_id,owner_id=request.user.id)
+    selected = Note.objects.get(id=note_id,owner=request.user.id)
     return render(request,"note_detail.html", 
                             {'sezione':{'titolo':'Note Detail '}, 'selected': selected})
 
